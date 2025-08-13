@@ -1,6 +1,52 @@
+import { useState } from "react";
+
 function ProductForm() {
+  const [name, setName] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [isShow, setIsShow] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const data = {
+    name: name,
+    imageURL: imageURL,
+    price: price,
+    description: description,
+    email: email,
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //Validation
+    if (name === "") {
+      setAlertMessage("Name is required.");
+      setIsShow(true);
+    } else if (imageURL === "") {
+      setAlertMessage("Image is required.");
+      setIsShow(true);
+    } else if (price === "" || price < 0) {
+      setAlertMessage("Price cannot be less than 0.");
+      setIsShow(true);
+    } else if (description === "") {
+      setAlertMessage("Description is required.");
+      setIsShow(true);
+    } else if (email === "") {
+      setAlertMessage("Email is required");
+      setIsShow(true);
+    } else {
+      setIsShow(false);
+      setAlertMessage("");
+    }
+
+    alert(JSON.stringify(data));
+  };
+
   return (
-    <form className="post-form">
+    <form className="post-form" onSubmit={handleSubmit}>
       <h1>Create Product Form</h1>
       <div className="input-container">
         <label>
@@ -10,9 +56,15 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={() => {}}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
         </label>
+        <div className="alertMessage">
+          {isShow ? <h4>{alertMessage}</h4> : null}
+        </div>
       </div>
       <div className="input-container">
         <label>
@@ -22,7 +74,10 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={() => {}}
+            value={imageURL}
+            onChange={(e) => {
+              setImageURL(e.target.value);
+            }}
           />
         </label>
       </div>
@@ -34,7 +89,10 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={() => {}}
+            value={price}
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
           />
         </label>
       </div>
@@ -46,7 +104,10 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={() => {}}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
             rows={4}
             cols={30}
           />
@@ -60,7 +121,10 @@ function ProductForm() {
             name="email"
             type="email"
             placeholder="Enter your email here"
-            onChange={() => {}}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
         </label>
       </div>

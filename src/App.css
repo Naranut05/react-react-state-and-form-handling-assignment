@@ -144,6 +144,9 @@ form h1 {
   justify-content: flex-end;
 }
 
+.alertMessage {
+}
+
 /* general elements */
 
 button {
