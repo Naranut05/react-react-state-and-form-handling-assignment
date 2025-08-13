@@ -157,3 +157,16 @@ button {
   outline: none;
   border: 5px solid var(--secondary-color);
 }
+
+
+.error {
+  background-color: red;
+  border-radius: 30px;
+  padding: 5px;
+  margin-top: 10px;
+  width: 220px;
+  color: white;
+  font-size: 20px;
+  outline: none;
+  border: 5px solid var(--secondary-color);
+}
